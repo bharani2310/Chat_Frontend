@@ -19,6 +19,7 @@ const Message = () => {
   const params=useParams()
   const socketConnection = useSelector(state=>state?.user?.socketConnection)
   const user = useSelector(state=>state?.user)
+
   const [open,setOpen]=useState(false)
   const [message,setMessage]=useState({
       text:'',
@@ -142,6 +143,8 @@ useEffect(()=>{
       if(params?.userId){
         const response = await getUserDetails(params.userId)
         resp=response
+      console.log("1111111111111111111111111111111111111111111111111",response)
+
         setData(response.data.data)
       }
       if(socketConnection){

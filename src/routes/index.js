@@ -27,14 +27,14 @@ const router = createHashRouter([
       },
       {
         path: 'forgot-password',
-        element: <AuthLayouts><ForgotPassword/></AuthLayouts>
+        element: <AuthLayouts><ForgotPassword /></AuthLayouts>
       },
       {
-        path: '/',
+        path: '', // Default nested path = '/'
         element: <Home />,
         children: [
           {
-            path: ':userId',  // This will match any path like /12345
+            path: ':userId', // e.g. /123 or /abc
             element: <Message />
           }
         ]

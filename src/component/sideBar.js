@@ -38,13 +38,13 @@ const SideBar = () => {
             const handleConversationUpdate = (data) => {
                 console.log("Received conversation data:", data);
 
-                const uniqueUsers = data.reduce((acc, conversationUser) => {
+                const uniqueUsers = data?.reduce((acc, conversationUser) => {
                     const otherUser =
-                        conversationUser.sender._id === user._id
+                        conversationUser?.sender?._id === user?._id
                             ? conversationUser.receiver
                             : conversationUser.sender;
     
-                    if (!acc.some((u) => u.userDetails._id === otherUser._id)) {
+                    if (!acc.some((u) => u.userDetails?._id === otherUser?._id)) {
                         acc.push({ ...conversationUser, userDetails: otherUser });
                     }
                     return acc;
@@ -94,7 +94,7 @@ const SideBar = () => {
             <div>
             <button title={user.name} onClick={()=>SetEditUser(true)} className={`w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200 rounded`}>
                     <span>
-                        <Avatar width={35} height={35} name={user.name} userId={user._id} imageUrl={user.profile_pic}/>
+                        <Avatar width={35} height={35} name={user.name} userId={user?._id} imageUrl={user.profile_pic}/>
                     </span>
                 </button>
                 <button title='Logout' className={`w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200 rounded`} onClick={handleLogout}>
@@ -124,8 +124,11 @@ const SideBar = () => {
 
                 {
                     allUser.map((conv,index)=>{
+                        console.log("🔍 Conversation:", conv?.userDetails?._id);
+                        console.log("🔍 Conv:", conv);
                         return(
-                            <NavLink to={'/'+conv.userDetails._id} key={conv?._id} className='flex items-center gap-2 py-3 px-2 hover:bg-slate-100 cursor-pointer'>
+                            <NavLink to={'/' + (conv?.lastMsg?.sender)} key={conv?._id} className='flex items-center gap-2 py-3 px-2 hover:bg-slate-100 cursor-pointer'>
+                            {/* <NavLink to={'/' + (conv?.userDetails?._id)} key={conv?._id} className='flex items-center gap-2 py-3 px-2 hover:bg-slate-100 cursor-pointer'> */}
                                 <div>
                                     <Avatar
                                     imageUrl={conv?.userDetails?.profile_pic}

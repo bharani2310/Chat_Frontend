@@ -16,6 +16,7 @@ const CheckPasswordPage = () => {
   })
   const navigate = useNavigate()
   const location = useLocation()
+
   const dispatch=useDispatch()
 
   const handleChange=(e)=>{
@@ -57,7 +58,7 @@ const CheckPasswordPage = () => {
   }
 
   useEffect(()=>{
-    if(!location?.state?.name){
+    if(!location?.state?.email){
       navigate('/email')
     }
     else if (location?.state?._id) {
